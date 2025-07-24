@@ -53,27 +53,27 @@ export const signup = async (req, res) => {
 export const login = async (req, res) => {
     try {
         const { email, password } = req.body;
-        const userdata = await User.findOne({ email });
+        const userData = await User.findOne({ email });
 
-        if (!userdata) {
+        if (!userData) {
             return res.status(400).json({ message: "Invalid credentials" });
         }
 
-        const ispasswordCorrect = await bcrypt.compare(password, userdata.password);
+        const ispasswordCorrect = await bcrypt.compare(password, userData.password);
         if (!ispasswordCorrect) {
             return res.status(400).json({ message: "Invalid credentials" });
         }
 
-        const token = generateToken(userdata._id);
+        const token = generateToken(userData._id);
         res.json({
             success: true,
             message: "User logged in successfully",
             user: {
-              _id: userdata._id,
-              email: userdata.email,
-              fullname: userdata.fullname,
-              bio: userdata.bio,
-              profilePicture: userdata.profilePicture,
+              _id: userData._id,
+              email: userData.email,
+              fullname: userData.fullname,
+              bio: userData.bio,
+              profilePicture: userData.profilePicture,
             },
             token,
           });

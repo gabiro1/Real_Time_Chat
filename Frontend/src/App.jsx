@@ -9,15 +9,15 @@ import { AuthContext } from './context/authContext'
 
 const App = () => {
 
-  const {Authuser} = useContext(AuthContext)
+  const {authUser} = useContext(AuthContext)
   return (
     <div className='bg-[url(./assets/bgImage.JPG)] bg-cover bg-no-repeat bg-center h-screen w-screen'>
       <Toaster />
       <Routes>
-        <Route path="/" element={Authuser ? <HomePage /> : <Navigate to='/login'/>} />
-        <Route path="/login" element={!Authuser ? <LoginPage /> : <Navigate to="/"/>} />
+        <Route path="/" element={authUser ? <HomePage /> : <Navigate to='/login'/>} />
+        <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to="/"/>} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/profile" element={Authuser ? <ProfilePage /> : <Navigate to='/login'/>} />
+        <Route path="/profile" element={authUser ? <ProfilePage /> : <Navigate to='/login'/>} />
       </Routes>
     </div>
   )

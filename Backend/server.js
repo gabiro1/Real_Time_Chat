@@ -52,6 +52,7 @@ app.use('/api/messages', messageRouter);
 //connect to database
 await connectDB();
 
+console.log("JWT Secret:", JSON.stringify(process.env.JWT_SECRET));
 // start server
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
