@@ -15,7 +15,7 @@ export const ChatProvider = ({ children }) => {
   // Get all chat users
   const getUsers = async () => {
     try {
-      const { data } = await axios.get("/api/messages/users/");
+      const { data } = await axios.get("/api/messages/users");
       if (data.success) {
         setUsers(data.users);
         setUnSeenMessages(data.unSeenMessages);
@@ -40,10 +40,7 @@ export const ChatProvider = ({ children }) => {
   // Send a new message
   const sendMessage = async (messageData) => {
     try {
-      const { data } = await axios.post(
-        `/api/message/send/${selectedUser._id}`,
-        messageData
-      );
+      const {data} = await axios.post(`/api/messages/send/${selectedUser._id}`,messageData);
       if (data.success) {
         setMessages((prevMessages) => [...prevMessages, data.newMessage]);
       } else {

@@ -25,11 +25,8 @@ const SideBar = () => {
   }, [onlineUsers])
 
   // Filter users based on search input
-  const filteredUsers = input.length
-    ? users.filter((user) =>
-        user.fullName.toLowerCase().includes(input.toLowerCase())
-      )
-    : users
+  const filteredUsers = input ?  users.filter((user)=>user.fullName?.toLowerCase().
+  includes(input.toLowerCase())): users;
 
   return (
     <div

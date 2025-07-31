@@ -10,7 +10,7 @@ export const getUsersForSidebar = async (req, res) => {
         const userId = req.user._id; // Get the current user's ID from the request
         const filteredUsers = await User.find({_id:{ $ne: userId }}).select("-password");
         
-        const unseenmessages = {};
+        const unSeenMessages = {};
         const promises = filteredUsers.map(async (user) => {
             const messages = await Message.find({
                 senderId: user._id,
@@ -18,14 +18,14 @@ export const getUsersForSidebar = async (req, res) => {
                 seen: false
             })
             if (messages.length > 0) {
-                unseenmessages[user._id] = messages.length;
+                unSeenMessages[user._id] = messages.length;
             }
         })
         await Promise.all(promises);
         res.json({
             success: true,
             users: filteredUsers,
-            unseenmessages
+            unSeenMessages
         });
         
     } catch (error) {
