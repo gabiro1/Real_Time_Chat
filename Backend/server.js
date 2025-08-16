@@ -52,11 +52,6 @@ app.use('/api/messages', messageRouter);
 //connect to database
 await connectDB();
 
-console.log("Cloudinary ENV:", {
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.Cloudinary_API_KEY,
-  api_secret: process.env.Cloudinary_API_SECRET,
-});
 
 // start server
 const PORT = process.env.PORT || 5000;
