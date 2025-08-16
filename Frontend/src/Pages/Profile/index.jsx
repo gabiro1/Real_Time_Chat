@@ -4,7 +4,7 @@ import assets from "../../assets/assets";
 import { AuthContext } from "../../context/authContext";
 
 const ProfilePage = () => {
-  const { authUser, UpdateProfile } = useContext(AuthContext);
+  const { authUser, updateProfile } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [selectedImage, setSelectedImage] = useState(null);
@@ -26,13 +26,13 @@ const ProfilePage = () => {
 
     try {
       if (!selectedImage) {
-        await UpdateProfile({ fullname: name, bio });
+        await updateProfile({ fullname: name, bio });
       } else {
         const reader = new FileReader();
         reader.readAsDataURL(selectedImage);
         reader.onload = async () => {
           const base64Image = reader.result;
-          await UpdateProfile({ fullname: name, bio, profilePicture: base64Image });
+          await updateProfile({ fullname: name, bio, profilePicture: base64Image });
           navigate("/");
         };
         return; // stop here; navigate is handled in onload

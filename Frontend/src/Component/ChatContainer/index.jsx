@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import assets from "../../assets/assets";
 import { formatMessageDate } from "../../lib/utils";
 import { ChatContext } from "../../context/ChatContext";
@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 
 const ChatContainer = () => {
   const {
-    message,
+    messages,
     selectedUser,
     setSelectedUser,
     sendMessage,
@@ -51,10 +51,10 @@ const ChatContainer = () => {
 
   // Auto scroll to bottom when messages change
   useEffect(() => {
-    if (scrollEnd.current && message) {
+    if (scrollEnd.current && messages) {
       scrollEnd.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [message]);
+  }, [messages]);
 
   return selectedUser ? (
     <div className="h-full overflow-scroll relative backdrop-blur-lg">
@@ -86,7 +86,7 @@ const ChatContainer = () => {
 
       {/* Chat Messages */}
       <div className="flex flex-col h-[calc(100%-120px)] overflow-y-scroll p-3 pb-6">
-        {message.map((msg, index) => {
+        {messages.map((msg, index) => {
           const isMe = msg.senderId === authUser._id;
           return (
             <div

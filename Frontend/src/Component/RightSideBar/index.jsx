@@ -4,13 +4,13 @@ import { ChatContext } from '../../context/ChatContext';
 import { AuthContext } from '../../context/authContext';
 
 const RightSideBar = () => {
-  const { selectedUser, message } = useContext(ChatContext);
+  const { selectedUser, messages } = useContext(ChatContext);
   const { logout, onlineUsers } = useContext(AuthContext);
   const [msgImages, setMsgImages] = useState([]);
 
   useEffect(() => {
-    setMsgImages(message.filter((msg) => msg.image).map((msg) => msg.image));
-  }, [message]);
+    setMsgImages(messages.filter((msg) => msg.image).map((msg) => msg.image));
+  }, [messages]);
 
   return (
     selectedUser && (
